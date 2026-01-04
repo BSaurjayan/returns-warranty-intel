@@ -277,24 +277,51 @@ Open:
 
 - Forecast sanity checks using MAE
 
-# Design Trade-offs & Future Enhancements
-Trade-offs
+# Known Limitations & Future Improvements
+## Known Limitations
 
-- SQLite used instead of a cloud database for simplicity
+- **Rule-based Intent Classification**  
+  The coordinator currently uses lightweight rule-based logic for intent detection. While effective for this scope, it may not generalize well to highly ambiguous or complex queries.
 
-- Rule-based intent routing chosen for determinism and safety
+- **Baseline Forecasting Model**  
+  Forecasting is implemented using a simple moving average. This approach does not account for seasonality, promotions, or external factors such as holidays.
 
-Future Enhancements
+- **Single-Node Vector Store**  
+  The semantic retrieval layer uses an in-memory vector store suitable for small datasets and demo-scale workloads, not large-scale production traffic.
 
-- Replace intent routing with LLM-based coordinator (LangChain / LangGraph)
+- **SQLite as Storage Backend**  
+  SQLite is used for simplicity and portability. It is not optimized for concurrent writes or high-throughput production environments.
 
-- Persist vector indices to disk
+- **Limited Entity Normalization**  
+  Product and store names are stored as free text, which may lead to duplication or inconsistent analytics at scale.
 
-- Upgrade forecasting to ARIMA or Prophet
 
-- Add authentication and role-based access
+## Future Improvements
 
-- Add dashboards for visual analytics
+- **LLM-Based Coordinator (Agentic Orchestration)**  
+  Replace rule-based intent classification with an LLM-powered coordinator capable of:
+  - More robust intent detection
+  - Tool selection via structured function calling
+  - Better handling of ambiguous or multi-intent queries
+
+- **Advanced Forecasting Models**  
+  Extend forecasting beyond moving averages to include:
+  - ARIMA / SARIMA for seasonality
+  - Prophet for holiday-aware forecasting
+  - ML-based approaches using historical features and exogenous variables
+
+- **Scalable Vector Store**  
+  Migrate from in-memory embeddings to a production-grade vector database (e.g., FAISS, Pinecone, or Weaviate) for improved scalability and persistence.
+
+- **Production-Grade Storage**  
+  Replace SQLite with PostgreSQL or a cloud-native database to support concurrent users, indexing, and transaction isolation.
+
+- **Entity Resolution & Master Data**  
+  Introduce normalization layers for products, stores, and geographies to improve analytics accuracy and reporting consistency.
+
+- **Observability & Monitoring**  
+  Add structured logging, metrics, and tracing to monitor agent performance, latency, and failure modes in production deployments.
+
 
 ## Live Demo
 
@@ -307,6 +334,8 @@ https://returns-warranty-intelgit-vtdjb8shhpmalqzmvo6msd.streamlit.app/
 - Generate analytics and downloadable Excel reports
 - Forecast future return volumes using a moving average model
 - Query historical returns using semantic search (RAG)
+
+
 
 # Conclusion
 
