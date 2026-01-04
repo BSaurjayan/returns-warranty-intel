@@ -64,6 +64,7 @@ The coordinator controls flow and state; agents perform deterministic, scoped ta
 
 User Input
    |
+   |
    v
 Coordinator
    |
