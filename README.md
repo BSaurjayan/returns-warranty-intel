@@ -68,28 +68,25 @@ The coordinator controls flow and state; agents perform deterministic, scoped ta
 
 ## Insert Return Flow Diagram
 
-User Input
-   |
-   |
-   v
-Coordinator
-   |
-   |-- missing fields? --> Ask follow-up
-   |
-   v
-Validated Request
-   |
-   v
-RetrievalAgent
-   |
-   |-- dedupe_key check
-   |
-   v
-Database Commit
-   |
-   v
-Confirmation to User
+```mermaid
+flowchart TD
+    U[User Input] --> C[Coordinator]
 
+    C -->|Missing fields?| Q[Ask Follow-up Questions]
+    Q --> U
+
+    C -->|All fields present| V[Validated Request]
+
+    V --> RA[Retrieval Agent]
+
+    RA -->|Check dedupe_key| D{Duplicate?}
+
+    D -->|Yes| E[Reject as Duplicate]
+    D -->|No| DB[(Database Commit)]
+
+    DB --> OK[Confirmation to User]
+    E --> OK
+```
 
 # Architecture & Design Rationale
 
@@ -198,14 +195,16 @@ The focus is on interpretability and explainability, appropriate for business de
 
 ## Analytics & Forecasting Flow Diagram
 
-User Query
-   |
-   v
-Coordinator
-   |
-   +--> ReportAgent --------> Aggregates + Excel
-   |
-   +--> ForecastAgent ------> Moving Average Forecast
+```mermaid
+flowchart TD
+    U[User Query] --> C[Coordinator]
+
+    C -->|Analytics request| RA[Report Agent]
+    RA --> R[Aggregations + Excel Report]
+
+    C -->|Forecast request| FA[Forecast Agent]
+    FA --> F[Moving Average Forecast]
+```
 
 
 # AI Usage Disclosure
