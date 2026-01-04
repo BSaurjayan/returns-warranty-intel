@@ -296,6 +296,18 @@ Future Enhancements
 
 - Add dashboards for visual analytics
 
+## Live Demo
+
+🔗 **Streamlit App:**  
+https://returns-warranty-intelgit-vtdjb8shhpmalqzmvo6msd.streamlit.app/
+
+### What You Can Try
+- Insert a return via natural language (multi-turn conversation)
+- Automatic duplicate return detection
+- Generate analytics and downloadable Excel reports
+- Forecast future return volumes using a moving average model
+- Query historical returns using semantic search (RAG)
+
 # Conclusion
 
 This project demonstrates how agentic AI systems can be built in a safe, explainable, and production-aligned manner, combining conversational UX with structured analytics and forecasting.
