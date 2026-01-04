@@ -35,15 +35,21 @@ This project demonstrates how an agent-based AI system can unify ingestion, anal
 
 # High Level Architecture
 
-User (Chat UI)
-      ↓
-Coordinator (Intent Routing + State)
-      ↓
-------------------------------------------------
-| Retrieval Agent | Report Agent | Forecast Agent |
-------------------------------------------------
-      ↓
-Database (SQLite) + Vector Store (RAG)
+```mermaid
+flowchart TD
+    U[User / Chat UI] --> C["Coordinator\n(Intent Routing + State)"]
+
+    C --> R[Retrieval Agent]
+    C --> A[Report Agent]
+    C --> F[Forecast Agent]
+
+    R --> DB[(SQLite Database)]
+    A --> DB
+    F --> DB
+
+    R --> VS[(Vector Store / RAG)]
+
+```
 
 
 ### Explanation
