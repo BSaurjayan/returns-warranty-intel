@@ -1,0 +1,9 @@
+streamlit>=1.30
+sqlalchemy>=2.0
+pydantic>=1.10
+pandas
+numpy
+scikit-learn
+sentence-transformers
+faiss-cpu
+openpyxl

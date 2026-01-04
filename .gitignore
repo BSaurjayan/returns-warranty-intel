@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+
+# Environment
+.env
+.env.*
+
+# OS
+.DS_Store
+
+# Streamlit
+.streamlit/
+
+# Databases
+*.db
+
+# Runtime-generated data
+data/
+reports/
+
+# Caches
+.cache/
