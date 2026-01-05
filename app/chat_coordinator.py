@@ -134,14 +134,16 @@ class Coordinator:
         t = text.lower()
 
         # ---------- PRODUCT ----------
+        # Product extraction
         if not state.pending_return["product_name"]:
-            m = re.search(
-                r"return (?:an|a)?\s+(.+?)(?:\s+from|\s+at|\s+because|\.|,|$)",
-                text,
-                re.I,
-            )
+            # Case 1: sentence-style input
+            m = re.search(r"return (?:my|an|a)?\s*(.+)", text, re.I)
             if m:
                 state.pending_return["product_name"] = m.group(1).strip()
+            # Case 2: short answer (e.g. "iphone", "apple tv")
+            elif len(text.split()) <= 4:
+                state.pending_return["product_name"] = text.strip()
+
 
         # ---------- STORE ----------
         if not state.pending_return["store_name"]:
